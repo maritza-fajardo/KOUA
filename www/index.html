@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <!--<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet"> -->
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+<script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
+    <!-- ionic/angularjs js -->
+    <!--<script src="lib/ionic/js/ionic.bundle.js"></script>-->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <!--<script src="cordova.js"></script> -->
+
+    <!-- your app's js -->
+    <!--<script src="js/app.js"></script>-->
+  </head>
+  <!--body ng-app="starter" onload="initDatabase();"-->
+  <body ng-app="starter" onload="initDatabase();">
+
+<!-- Inicio de código central-->
+    <ion-pane>
+      <ion-header-bar class="bar-positive">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" href="index.html">Index</a>
+        <h1 class="title">KOUA</h1>
+      </ion-header-bar>
+      
+      <div class="bar bar-footer bar-balanced">
+      <div class="title">Maritza Sugey Fajardo Borjas 2014</div>
+      </div>
+
+
+      <!-- Inicio de código central-->  
+      
+      <ion-content>
+
+      <input type="hidden" id="id"/>
+<div class="list"> 
+      <!--div class="bar bar-header bar-balanced">
+      <h1 class="title">Ventas casa por casa</h1>
+      </div-->
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">CORREO ELECTRÓNICO</span>
+        <input id="email" type="text" placeholder="Maritza01@hotmail.com">
+      </label>
+    </br>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">CONTRASEÑA</span>
+        <input id="password" type="text" placeholder="***********">
+      </label>
+    </br>
+     <a href="#">
+      <button class="button button-full button-positive" onclick="login()"> 
+        Enviar
+      </button>
+      </a>
+
+      </br>
+       <a href="registro.html">
+      <!--<button class="button button-block button-balanced"> -->
+      <button class="button button-full button-positive"> 
+        ¡Registrate!
+      </button>
+      </a>
+      </br>
+      
+      <a href="listado_usuarios.html">
+      <!--<button class="button button-block button-balanced"> -->
+          <button class="button button-full button-positive"> 
+            Ver usuarios
+          </button>
+      </a>
+
+</div>
+
+  
+      </ion-content>
+      <!-- Inicio de código central-->  
+    </ion-pane>
+  </body>
+   <script type="text/javascript" src="codigo.js"> </script>
+</html>

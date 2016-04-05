@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <!--<link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet"> -->
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+ <script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
+    <!-- ionic/angularjs js -->
+    <!--<script src="lib/ionic/js/ionic.bundle.js"></script>-->
+
+    <!-- cordova script (this will be a 404 during development) -->
+     <!--<script src="cordova.js"></script> -->
+
+    <!-- your app's js -->
+    <!--<script src="js/app.js"></script>-->
+  </head>
+  <!--body ng-app="starter" onload="initDatabase();"-->
+  <body ng-app="starter" onload="initDatabase();">
+
+<!-- Inicio de código central-->
+    <ion-pane>
+      <ion-header-bar class="bar-positive">
+      <a class="button icon-left ion-chevron-left button-clear button-dark" href="index.html">Regresar</a>
+        <h1 class="title">Buy&Sold now!</h1>
+      </ion-header-bar>
+      
+      <div class="bar bar-footer bar-balanced">
+      <div class="title">Maritza Sugey Fajardo Borjas 2014</div>
+      </div>
+
+
+      <!-- Inicio de código central-->  
+      
+      <ion-content>
+
+      <input type="hidden" id="id"/>
+<div class="list"> 
+      <!--div class="bar bar-header bar-balanced">
+      <h1 class="title">Ventas casa por casa</h1>
+      </div-->
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Full Name</span>
+        <input maxlength="50" size="35" id="user_name" type="text" placeholder="Maritza Sugey Fajardo Borjas">
+      </label>
+    </br>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">E-mail</span>
+        <input maxlength="50" size="35" id="email" type="text" placeholder="ROSVSHMH19013F82">
+      </label>
+      </br>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Password</span>
+        <input maxlength="15" size="35" id="password" type="text" placeholder="psw">
+      </label>
+      </br>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Phone</span>
+        <input maxlength="30" size="35" id="phone" type="text" placeholder="52 312 330 1073">
+      </label>
+      </br>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Cellphone</span>
+        <input maxlength="30" size="35" id="cellphone" type="text" placeholder="Maritza01@hotmail.com">
+      </label>
+      </br>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Address</span>
+        <input maxlength="150" size="35" id="address" type="text" placeholder="Av. Independencia No. 1572, Centro">
+      </label>
+      </br>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">Type</span>
+        <input maxlength="10" size="10" id="type" type="text" placeholder="type">
+      </label>
+</div>
+
+<div class="button-bar">
+  <a class="button" onclick="insertRecord()">Registrarse</a>
+</div>
+
+<div class="button-bar">
+  <a class="button" onclick="dropTable()">Drop table</a>
+</div>
+
+    </ion-content>
+      <!-- Inicio de código central-->  
+    </ion-pane>
+  </body>
+   <script type="text/javascript" src="codigo.js"> </script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
