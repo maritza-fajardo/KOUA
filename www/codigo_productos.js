@@ -1,20 +1,18 @@
 //  Declare SQL Query for SQLite
  
-var createStatement = "CREATE TABLE IF NOT EXISTS Users (id INTEGER PRIMARY KEY AUTOINCREMENT, user_name varchar(50), email varchar(50), password varchar(15), phone varchar(30), cellphone varchar(30), address varchar(150), type varchar(10))";
+var createStatement = "CREATE TABLE IF NOT EXISTS Products (id INTEGER PRIMARY KEY AUTOINCREMENT, product_name varchar(50), description varchar(150), price varchar(50), quantity varchar(50))";
  
-var selectAllStatement = "SELECT * FROM Users";
+var selectAllStatement = "SELECT * FROM Products";
  
-var insertStatement = "INSERT INTO Users (user_name, email, password, phone, cellphone, address, type) VALUES (?,?,?,?,?,?,?)";
-
-var loginStatement = "SELECT * FROM Users WHERE email = ? AND password = ?";
+var insertStatement = "INSERT INTO Products (product_name, description, price, quantity) VALUES (?,?,?,?)";
  
-var updateStatement = "UPDATE Users SET user_name = ?, email = ?, password = ?, phone=?, cellphone=?, address=?, type=? WHERE id=?";
+var updateStatement = "UPDATE Products SET product_name = ?, description = ?, price = ?, quantity=? WHERE id=?";
  
-var deleteStatement = "DELETE FROM Users WHERE id=?";
+var deleteStatement = "DELETE FROM Products WHERE id=?";
  
-var dropStatement = "DROP TABLE Users";
+var dropStatement = "DROP TABLE Products";
  
-var db = openDatabase("UsersBook", "2.0", "Users Book", 200000);  // Open SQLite Database
+var db = openDatabase("ProductsBook", "2.0", "Products Book", 200000);  // Open SQLite Database
  
 var dataset;
  
@@ -78,15 +76,12 @@ function insertRecord() // Get value from Input and insert record . Function Cal
  
 {
 
-        var user_nametemp = $('input:text[id=user_name]').val();
-        var emailtemp = $('input:text[id=email]').val();
-        var passwordtemp = $('input:text[id=password]').val();
-        var phonetemp = $('input:text[id=phone]').val();
-        var cellphonetemp = $('input:text[id=cellphone]').val();
-        var addresstemp = $('input:text[id=address]').val();
-        var typetemp = $('input:text[id=type]').val();
+        var product_nametemp = $('input:text[id=product_name]').val();
+        var descriptiontemp = $('input:text[id=description]').val();
+        var pricetemp = $('input:text[id=price]').val();
+        var quantitytemp = $('input:text[id=quantity]').val();
 
-        db.transaction(function (tx) { tx.executeSql(insertStatement, [user_nametemp, emailtemp, passwordtemp,phonetemp,cellphonetemp,addresstemp,typetemp], loadAndReset, onError); });
+        db.transaction(function (tx) { tx.executeSql(insertStatement, [product_nametemp, descriptiontemp, pricetemp, quantitytemp], loadAndReset, onError); });
  
         //tx.executeSql(SQL Query Statement,[ Parameters ] , Sucess Result Handler Function, Error Result Handler Function );
  
@@ -108,17 +103,14 @@ function updateRecord() // Get id of record . Function Call when Delete Button C
  
 {
  
-    var user_nameupdate = $('input:text[id=user_name]').val().toString();
-    var emailupdate = $('input:text[id=email]').val().toString();
-    var passwordupdate = $('input:text[id=password]').val().toString();
-    var phoneupdate = $('input:text[id=phone]').val().toString();
-    var cellphoneupdate = $('input:text[id=cellphone]').val().toString();
-    var addressupdate = $('input:text[id=address]').val().toString();
-    var typeupdate = $('input:text[id=type]').val().toString();
+    var product_nameupdate = $('input:text[id=product_name]').val().toString();
+    var descriptionupdate = $('input:text[id=description]').val().toString();
+    var priceupdate = $('input:text[id=price]').val().toString();
+    var quantityupdate = $('input:text[id=quantity]').val().toString();
  
-    var useridupdate = $("#id").val();
+    var productidupdate = $("#id").val();
  
-    db.transaction(function (tx) { tx.executeSql(updateStatement, [user_nameupdate, emailupdate, passwordupdate,phoneupdate,cellphoneupdate, addressupdate, typeupdate, Number(useridupdate)], loadAndReset, onError); });
+    db.transaction(function (tx) { tx.executeSql(updateStatement, [product_nameupdate, descriptionupdate, priceupdate, quantityupdate, Number(productidupdate)], loadAndReset, onError); });
     onloadDone = false; 
 }
  
@@ -140,13 +132,10 @@ function loadRecord(i) // Function for display records which are retrived from d
 
     var item = dataset.item(i);
  
-    $("#user_name").val((item['user_name']).toString());
-    $("#email").val((item['email']).toString());
-    $("#password").val((item['password']).toString());
-    $("#phone").val((item['phone']).toString());
-    $("#cellphone").val((item['cellphone']).toString());
-    $("#address").val((item['address']).toString());
-    $("#type").val((item['type']).toString());
+    $("#product_name").val((item['product_name']).toString());
+    $("#description").val((item['description']).toString());
+    $("#price").val((item['price']).toString());
+    $("#quantity").val((item['quantity']).toString());
 
     $("#id").val((item['id']).toString());
  
@@ -156,13 +145,10 @@ function resetForm() // Function for reset form input values.
  
 {
 
-    $("#user_name").val("");
-    $("#email").val("");
-    $("#password").val("");
-    $("#phone").val("");
-    $("#cellphone").val("");
-    $("#address").val("");
-    $("#type").val("");
+    $("#product_name").val("");
+    $("#description").val("");
+    $("#price").val("");
+    $("#quantity").val("");
 
     $("#id").val("");
  
@@ -183,33 +169,6 @@ function onError(tx, error) // Function for Hendeling Error...
 {
  
     alert(error.message);
- 
-}
- 
-function login(id) // Get id of record . Function Call when Delete Button Click..
- 
-{
- 
-        var emailtemp = $('input:text[id=email]').val();
-        var passwordtemp = $('input:text[id=password]').val();
-        db.transaction(function (tx) { tx.executeSql(loginStatement, [emailtemp,passwordtemp],  function(tx, result){ // <-- this is where you forgot tx
-            
-      
-
-            if(result.rows.length > 0)
-            {
-               document.location.href=("listado_usuarios.html");
-            }
-            else
-            {
-            alert("Correo y/o contraseña invalido");
-
-            }
-
-        }, onError); });
-
- 
-    resetForm();
  
 }
 
