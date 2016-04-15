@@ -1,12 +1,12 @@
 //  Declare SQL Query for SQLite
  
-var createStatement = "CREATE TABLE IF NOT EXISTS Products (id INTEGER PRIMARY KEY AUTOINCREMENT, product_name varchar(50), description varchar(150), price varchar(50), quantity varchar(50), id_user varchar(5))";
+var createStatement = "CREATE TABLE IF NOT EXISTS Products (id INTEGER PRIMARY KEY AUTOINCREMENT, product_name varchar(50), description varchar(150), price varchar(50), quantity varchar(50), id_user varchar(5), data TEXT)";
  
 var selectAllStatement = "SELECT * FROM Products";
  
-var insertStatement = "INSERT INTO Products (product_name, description, price, quantity, id_user) VALUES (?,?,?,?,?)";
+var insertStatement = "INSERT INTO Products (product_name, description, price, quantity, id_user, data) VALUES (?,?,?,?,?,?)";
  
-var updateStatement = "UPDATE Products SET product_name = ?, description = ?, price = ?, quantity=?, id_user=? WHERE id=?";
+var updateStatement = "UPDATE Products SET product_name = ?, description = ?, price = ?, quantity=?, id_user=?, data=? WHERE id=?";
  
 var deleteStatement = "DELETE FROM Products WHERE id=?";
  
@@ -77,17 +77,13 @@ function insertRecord() // Get value from Input and insert record . Function Cal
 {
 
         var product_nametemp = $('input:text[id=product_name]').val();
-        alert(product_nametemp);
         var descriptiontemp = $('input:text[id=description]').val();
-        alert(descriptiontemp);
         var pricetemp = $('input:text[id=price]').val();
-        alert(pricetemp);
         var quantitytemp = $('input:text[id=quantity]').val();
-        alert(quantitytemp);
         var id_usertemp = $('input:text[id=id_user]').val();
-        alert(id_usertemp);
+        var datatemp = $('input:text[id=data]').val();
 
-        db.transaction(function (tx) { tx.executeSql(insertStatement, [product_nametemp, descriptiontemp, pricetemp, quantitytemp, id_usertemp], loadAndReset, onError); });
+        db.transaction(function (tx) { tx.executeSql(insertStatement, [product_nametemp, descriptiontemp, pricetemp, quantitytemp, id_usertemp, datatemp], loadAndReset, onError); });
  
         //tx.executeSql(SQL Query Statement,[ Parameters ] , Sucess Result Handler Function, Error Result Handler Function );
  
@@ -114,10 +110,11 @@ function updateRecord() // Get id of record . Function Call when Delete Button C
     var priceupdate = $('input:text[id=price]').val().toString();
     var quantityupdate = $('input:text[id=quantity]').val().toString();
     var id_userupdate = $('input:text[id=id_user]').val().toString();
+    var dataupdate = $('input:text[id=data]').val().toString();
  
     var productidupdate = $("#id").val();
  
-    db.transaction(function (tx) { tx.executeSql(updateStatement, [product_nameupdate, descriptionupdate, priceupdate, quantityupdate, id_userupdate, Number(productidupdate)], loadAndReset, onError); });
+    db.transaction(function (tx) { tx.executeSql(updateStatement, [product_nameupdate, descriptionupdate, priceupdate, quantityupdate, id_userupdate, dataupdate, Number(productidupdate)], loadAndReset, onError); });
     onloadDone = false; 
 }
  
@@ -144,6 +141,8 @@ function loadRecord(i) // Function for display records which are retrived from d
     $("#price").val((item['price']).toString());
     $("#quantity").val((item['quantity']).toString());
     $("#id_user").val((item['id_user']).toString());
+    $("#data").val((item['data']).toString());
+    $("#dataImg").attr("src",(item['data']).toString());
 
     $("#id").val((item['id']).toString());
  
@@ -158,6 +157,9 @@ function resetForm() // Function for reset form input values.
     $("#price").val("");
     $("#quantity").val("");
     $("#id_user").val("");
+    $("#data").val("");
+    $("#dataImg").attr("src","");
+
 
     $("#id").val("");
  

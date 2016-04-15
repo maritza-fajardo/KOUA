@@ -11,7 +11,7 @@
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
- <script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-2.2.1.min.js"></script>
     <!-- ionic/angularjs js -->
     <!--<script src="lib/ionic/js/ionic.bundle.js"></script>-->
 
@@ -20,6 +20,51 @@
 
     <!-- your app's js -->
     <!--<script src="js/app.js"></script>-->
+    <script>
+
+        var URL = window.webkitURL || window.URL;
+
+        function encodeImage(src, callback)
+        {
+          
+           var canvas = document.createElement('canvas'),
+                ctx = canvas.getContext('2d'),
+                img = new Image();
+
+            img.onload = function ()
+            {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0, img.width, img.height);
+                callback(canvas.toDataURL());//Image become to a string
+            }
+
+            img.src = src;;
+        }
+
+        window.onload = function ()
+        {
+            var input = document.getElementById('fileImage');
+            input.addEventListener('change', handleFiles, false);
+            
+        }
+
+
+        function handleFiles(e)
+        {
+           
+            var urlImage = URL.createObjectURL(e.target.files[0]);         
+
+            encodeImage(urlImage, 
+                function (encodedImage)//Image to a string
+            {
+                document.getElementById('data').value = encodedImage;
+                document.getElementById('dataImg').src = encodedImage;
+            }
+            );
+        }
+
+    </script>
   </head>
   <!--body ng-app="starter" onload="initDatabase();"-->
   <body ng-app="starter" onload="initDatabase();">
@@ -49,22 +94,44 @@
         <span class="input-label">product_name</span>
         <input maxlength="50" size="35" id="product_name" type="text" placeholder="Florero">
       </label>
+      </br>
       <label class="item item-input item-stacked-label">
         <span class="input-label">description</span>
         <input maxlength="150" size="35" id="description" type="text" placeholder="Florero de barro artesanal.">
       </label>
+      </br>
       <label class="item item-input item-stacked-label">
         <span class="input-label">price</span>
         <input maxlength="50" size="35" id="price" type="text" placeholder="$120.00">
       </label>
+      </br>
       <label class="item item-input item-stacked-label">
         <span class="input-label">quantity</span>
         <input maxlength="50" size="35" id="quantity" type="text" placeholder="12">
       </label>
+      </br>
       <label class="item item-input item-stacked-label">
         <span class="input-label">id_user</span>
         <input maxlength="5" size="10" id="id_user" type="text" placeholder="1">
       </label>
+      </br>
+      <label class="item item-input item-stacked-label">
+        <span class="input-label">image</span>
+        <!--<input maxlength="5" size="10" id="id_user" type="text" placeholder="1">-->
+        
+        <table>
+        <tr>
+            <td colspan="2"><input id="fileImage" type="file" /></td>   
+        </tr>
+        <tr>
+            <!--<td><textarea id="data"></textarea></td>-->
+            <td><input disabled="disabled" id="data" type="text" placeholder="data"></td>
+            <td><img id="dataImg"  /></td>
+        </tr>
+        </table>
+
+      </label>
+
 </div>
 
 <div class="button-bar">
